@@ -49,6 +49,8 @@ const PathFind = () => {
 
         const start = grid[start_row][start_col];
         const end = grid[end_row][end_col];
+        start.isWall = false;
+        end.isWall = false;
         let path = aStar(start, end);
         setPath(path.path);
         setVisitedNodes(path.visitedNodes);
@@ -72,6 +74,11 @@ const PathFind = () => {
         this.h = 0;
         //Neighbors will determine the specific spot that the color will have
         this.neighbors = [];
+        //
+        this.isWall = false;
+        if(Math.random(1) < 0.2) { 
+            this.isWall = true;
+        }
         this.previous = undefined;
         this.addNeighbors = function(grid)
         {
@@ -92,13 +99,14 @@ const nodeGrid = (
             <div key={rowIndex} className="rowWrapper">
             {row.map((col, colIndex) => { 
                 //Destructuring the start and end of the grid. To loop through each element of the grid.
-                const {start, end} = col;
+                const {start, end, isWall} = col;
                 return <Node 
                 key={colIndex} 
                 start={start} 
                 end={end} 
                 row={rowIndex} 
                 col={colIndex} 
+                isWall = {isWall}
                 />;
             })}
             </div>

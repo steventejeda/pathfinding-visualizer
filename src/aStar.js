@@ -48,7 +48,7 @@ function aStar(start, end) {
 
         let neighbor = neighbors[index];
         //Check if closedSet includes neighbor, if it does the search function can move on. 
-        if(!closedSet.includes(neighbor)) { 
+        if(!closedSet.includes(neighbor) && !neighbor.isWall) { 
             let tempG = current.g + 1;
             let newPath = false;
             //If openSet includes neighbor then the g value will be updated.

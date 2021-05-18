@@ -13,6 +13,10 @@
     background-color: red;
 }
 
+.isWall {
+    background-color: rgba(0, 0, 66, 0.75);
+}
+
 .node-visited {
     animation-name: visitedAnimation;
     animation-duration: 1.5s;
