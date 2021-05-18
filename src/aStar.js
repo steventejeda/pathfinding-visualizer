@@ -8,6 +8,8 @@ function aStar(start, end) {
     let closedSet = [];
     //This will contain the shortest path.
     let path = [];
+    let visitedNodes = [];
+
 
     openSet.push(start);
     //Loop through all of the elements of the openSet
@@ -21,7 +23,7 @@ function aStar(start, end) {
         }
     
     let current = openSet[leastIndex];
-
+    visitedNodes.push(current);
     if(current === end) {
         let tempVal = current;
         path.push(tempVal);
@@ -30,7 +32,7 @@ function aStar(start, end) {
             tempVal = tempVal.previous;
         }
         // console.log(path)
-        return path;
+        return {path, visitedNodes}
 
         // console.log("Done!, Path found!")
     }
@@ -71,7 +73,7 @@ function aStar(start, end) {
 
     }
 
-    return {path, error: "No path found!"}
+    return {path, visitedNodes, error: "No path found!"}
 }
 //Heruistic meaining = self discovery.
 //Utilizing the manhattan distance formula to calculate the distance between two points. 

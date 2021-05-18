@@ -5,7 +5,7 @@ import '../styles/PathFind.css'
 
 //Variables for columns and rows for the grid
 const cols = 25; 
-const rows = 15;
+const rows = 10;
 
 //Varibles to specify where does rows and cols start and end.
 const start_row = 0;
@@ -16,6 +16,7 @@ const end_col = cols-1;
 const PathFind = () => {
     const [Grid, setGrid] = useState([]);
     const [Path, setPath] = useState([]);
+    const [visitedNodes, setVisitedNodes] = useState([]);
 
     const createSpot = (grid) => { 
         //Loop through two dimensional utilizing the inner loop and outer loop
@@ -49,7 +50,8 @@ const PathFind = () => {
         const start = grid[start_row][start_col];
         const end = grid[end_row][end_col];
         let path = aStar(start, end);
-        setPath(path);
+        setPath(path.path);
+        setVisitedNodes(path.visitedNodes);
 
     };
     //To initiliaze grid before anything else is rendered.
@@ -91,7 +93,13 @@ const nodeGrid = (
             {row.map((col, colIndex) => { 
                 //Destructuring the start and end of the grid. To loop through each element of the grid.
                 const {start, end} = col;
-                return <Node key={colIndex} start={start} end={end} row={rowIndex} col={colIndex} />;
+                return <Node 
+                key={colIndex} 
+                start={start} 
+                end={end} 
+                row={rowIndex} 
+                col={colIndex} 
+                />;
             })}
             </div>
             );
@@ -99,12 +107,41 @@ const nodeGrid = (
     </div>
 );
 
+    const visualizeShortestPath = (shortestPath) =>  {
+        for(let short = 0; short < shortestPath.length; short++) { 
+            setTimeout(() => { 
+                const node = shortestPath[short];
+                document.getElementById(`node-${node.row}-${node.column}`).className="node node-shortest-path";
+            }, 10 * short)
+        }
+       
+    }
+
+    const visualizePath = () => { 
+        for(let short = 0; short <= visitedNodes.length; short++) { 
+         if(short === visitedNodes.length) { 
+            setTimeout(() => { 
+             visualizeShortestPath(Path);
+            }, 20 * short);
+        } else { 
+            setTimeout(() =>  {
+                const node = visitedNodes[short];
+                document.getElementById(`node-${node.row}-${node.column}`).className="node node-visited";
+            }, 20 * short)
+        }
+    }
+}
+
+    console.log(Path)
+
     return (
         <div className="wrapper">
-            <h1>Pathfind Component</h1>
+            <h1>Path Finding Visualizer using the A* Search Algorithm</h1>
             {nodeGrid}
+            <br/>
+            <button onClick={visualizePath}>Visualize Path</button>
         </div>
-    )
+    );
 }
 
 export default PathFind
