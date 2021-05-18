@@ -6,3 +6,6 @@ User Interface built using React Framework to visualize Pathfinding A* Algorithm
 ## Pathfinding Algorithm
 1. A* Algorithm
 * More coming soon!
+
+
+See it in action
