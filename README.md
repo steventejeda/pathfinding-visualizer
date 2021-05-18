@@ -1,1 +1,1 @@
-Pathfinding Visualizer
+# PathFinding and random wall generation visualizer.
