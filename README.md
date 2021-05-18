@@ -7,5 +7,6 @@ User Interface built using React Framework to visualize Pathfinding A* Algorithm
 1. A* Algorithm
 * More coming soon!
 
+# Demo: 
 
-See it in action
+([See it in action](https://pathfinding-hodgkin-14bb43.netlify.app/)) 
